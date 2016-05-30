@@ -1,0 +1,10 @@
+{
+  "name": "PocketReleases",
+  "app_id": "c62cc96f",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://api.backand.com/"
+    }
+  ]
+}

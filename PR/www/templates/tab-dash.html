@@ -1,0 +1,20 @@
+<ion-view view-title="Explore">
+  <ion-content lazy-scroll>
+
+  	<ion-slide-box>
+	    <ion-slide ng-repeat="item in items" ng-click="viewDetails(item)">
+	        <img image-lazy-src="{{item.game_url}}" image-lazy-loader="android"/>
+	        <div class="item-title">{{item.game_title}}</div>
+	    </ion-slide>
+	</ion-slide-box>
+
+	<div class="dash_inner">
+		<h4>WHAT'S NEW</h4>
+
+
+
+
+	</div>
+
+  </ion-content>
+</ion-view>
