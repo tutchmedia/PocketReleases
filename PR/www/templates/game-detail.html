@@ -1,0 +1,47 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+
+  <ion-view view-title="{{game.game_title}}">
+
+  <ion-content>
+    <img ng-src="{{game.game_url}}" style="width: inherit; height: inherit;">
+    <p>
+      {{game.game_title}}
+    </p>
+  </ion-content>
+</ion-view>
+
+-->
+
+<ion-view view-title="{{game.game_title}}">
+  <ion-nav-bar class="bar-white">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+
+  </ion-nav-bar>
+
+  <ion-nav-buttons side="right">
+    <button ng-class="{'button button-icon icon ion-android-star-outline': !liked, 'button button-icon icon ion-android-star': liked}" ng-click="liked=!liked"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header" scroll="false">
+    <div class="view-header">
+      <img ng-src="{{game.game_url}}" style="width: 100%; height: inherit; z-index:6666;">
+    </div>
+
+    <div class="detail-content">
+      <div class="detail-content-header"></div>
+      <div class="detail-container">
+        <ion-scroll direction="y" style=" height: 500px">
+          <h4>{{game.game_title}}</h4>  
+
+        </ion-scroll>
+      </div>
+
+
+    </div>
+  </ion-content>
+</ion-view>
