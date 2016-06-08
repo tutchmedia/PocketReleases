@@ -2,14 +2,15 @@ angular.module('starter.services', [])
 
 
 
-.service('DatabaseService', function($http, Backand){    
+.service('DatabaseService', function($http, Backand, $ionicLoading){    
 
       var baseUrl = '/1/objects/';
 
       return {
 
         // read all rows in the object
-          readAll: function(objectName) {  
+          readAll: function(objectName) { 
+            $ionicLoading.show(); 
             return $http({
               method: 'GET',
               url: Backand.getApiUrl() + baseUrl + objectName
@@ -19,11 +20,24 @@ angular.module('starter.services', [])
             });
           },
 
+
+          readFiltered: function(objectName, filter) { 
+            $ionicLoading.show(); 
+            return $http({
+              method: 'GET',
+              url: Backand.getApiUrl() + baseUrl + objectName + '?filter=' + encodeURIComponent(filter)
+           }).then(
+          function(response) {
+              return response.data.data;
+            });
+          },
+
         // read one row with given id
           readOne: function(objectName, id) {
+            $ionicLoading.show(); 
           return $http({
             method: 'GET',
-            url: Backand.getApiUrl() + baseUrl + self.objectName 
+            url: Backand.getApiUrl() + baseUrl + objectName 
                 + '/' + id
           }).then(
             function(response) {

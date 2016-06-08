@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
     }
   });
 })
@@ -55,6 +55,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
+
+  .state('tab.game-detail', {
+      url: '/game/:id',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/game-detail.html',
+          controller: 'GameDetailCtrl'
+        }
+      }
+    })
 
   .state('tab.chats', {
       url: '/chats',

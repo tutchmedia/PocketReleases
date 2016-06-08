@@ -1,20 +1,65 @@
 <ion-view view-title="Explore">
-  <ion-content lazy-scroll>
+	<ion-nav-bar class="bar-white">
+      <ion-nav-back-button>
+      </ion-nav-back-button>      
+    </ion-nav-bar>
+	<ion-nav-buttons side="left">
+        <button class="button button-icon ion-ios-search icon-small" ng-click="doSomething()"></button>
+      </ion-nav-buttons>
 
-  	<ion-slide-box>
-	    <ion-slide ng-repeat="item in items" ng-click="viewDetails(item)">
-	        <img image-lazy-src="{{item.game_url}}" image-lazy-loader="android"/>
-	        <div class="item-title">{{item.game_title}}</div>
-	    </ion-slide>
-	</ion-slide-box>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon icon-calendar-full" ng-click="doSomething()"></button>
+      </ion-nav-buttons>
 
-	<div class="dash_inner">
-		<h4>WHAT'S NEW</h4>
+      <!-- Content -->
+	  <ion-content lazy-scroll>
+
+	  	<ion-slide-box>
+		    <ion-slide ng-repeat="item in items" type="item-text-wrap" ng-click="viewGameDetails({{item}})">
+		        <img image-lazy-src="{{item.game_url}}" image-lazy-loader="android"/>
+		        <div class="item-title">{{item.game_title}}</div>
+		    </ion-slide>
+		</ion-slide-box>
+
+		<div class="dash_inner">
+			<div class="header-breaker">
+				<div class="row">
+				  <div class="col col-75">What's New</div>
+				  <div class="col right-text"><i class="icon ion-more"></i></div>
+				</div>
+			</div>
+
+			<ion-list show-delete="shouldShowDelete"
+			          show-reorder="shouldShowReorder"
+			          can-swipe="listCanSwipe">
+			  <ion-item ng-repeat="game in games"
+			            class="item-thumbnail-left">
+
+			    <img ng-src="{{item.img}}">
+			    <h2>{{game.game_title}}</h2>
+			    <p>{{game.game_description}}</p>
+			    <ion-option-button class="button-positive"
+			                       ng-click="share(item)">
+			      Share
+			    </ion-option-button>
+			    <ion-option-button class="button-info"
+			                       ng-click="edit(item)">
+			      Edit
+			    </ion-option-button>
+			    <ion-delete-button class="ion-minus-circled"
+			                       ng-click="items.splice($index, 1)">
+			    </ion-delete-button>
+			    <ion-reorder-button class="ion-navicon"
+			                        on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+			    </ion-reorder-button>
+
+			  </ion-item>
+			</ion-list>
 
 
 
 
-	</div>
+		</div>
 
-  </ion-content>
+	  </ion-content>
 </ion-view>

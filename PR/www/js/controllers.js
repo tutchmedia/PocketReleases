@@ -12,22 +12,53 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('DashCtrl', function($scope, DatabaseService, $ionicSlideBoxDelegate) {
+.controller('DashCtrl', function($scope, DatabaseService, $ionicSlideBoxDelegate, $stateParams, $state, $ionicLoading) {
 
   $scope.items = [];
+  $scope.games = [];
 
 
-  DatabaseService.readAll('games').then(
+  // Featured Slider
+  DatabaseService.readFiltered('games', '[{"fieldName":"featured","operator":"equals","value":"true"}]').then(
     function(data){
       $scope.items = data;
       $ionicSlideBoxDelegate.update();
+      $ionicLoading.hide();
+  });
+
+  //Latest Games
+
+  DatabaseService.readAll('games').then(
+    function(data){
+      $scope.games = data;
+      $ionicSlideBoxDelegate.update();
+      $ionicLoading.hide();
   });
 
 
-  $scope.viewDetails = function($game) {
-    console.log($game);
+
+
+  $scope.viewGameDetails = function(game) {
+    console.log(game);
+    $state.go("tab.game-detail", {id: game.id});
   }
 
+})
+
+
+.controller('GameDetailCtrl', function($scope, $stateParams, DatabaseService, $ionicLoading) {
+
+  $scope.liked = false;
+
+
+  $scope.game = [];
+
+  console.log($stateParams);
+  $scope.game = DatabaseService.readOne('games', $stateParams.id).then(
+    function(data) {
+      $scope.game = data;
+      $ionicLoading.hide();
+    });
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
