@@ -28,7 +28,7 @@ angular.module('starter.controllers', [])
 
   //Latest Games
 
-  DatabaseService.readAll('games').then(
+  DatabaseService.readFiltered('games', '[{"fieldName":"featured","operator":"equals","value":"false"}]').then(
     function(data){
       $scope.games = data;
       $ionicSlideBoxDelegate.update();
