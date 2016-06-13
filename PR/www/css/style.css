@@ -278,6 +278,10 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 	padding-left: 85px;
 }
 
+.scroll-refresher .ionic-refresher-content {
+	color:#ffffff !important;
+}
+
 
 @media not all, (-webkit-min-device-pixel-ratio: 1.5), not all, (min-resolution: 144dpi), (min-resolution: 1.5dppx)
 	.tabs {

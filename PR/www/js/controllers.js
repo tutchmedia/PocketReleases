@@ -36,6 +36,31 @@ angular.module('starter.controllers', [])
   });
 
 
+  // Pull to Refresh
+  $scope.doRefresh = function() {
+
+    // Featured Slider
+    DatabaseService.readFiltered('games', '[{"fieldName":"featured","operator":"equals","value":"true"}]').then(
+      function(data){
+        $scope.items = data;
+        $ionicSlideBoxDelegate.update();
+        $ionicLoading.hide();
+    });
+
+    //Latest Games
+
+    DatabaseService.readFiltered('games', '[{"fieldName":"featured","operator":"equals","value":"false"}]').then(
+      function(data){
+        $scope.games = data;
+        $ionicSlideBoxDelegate.update();
+        $ionicLoading.hide();
+    }).finally(function() {
+         // Stop the ion-refresher from spinning
+         $scope.$broadcast('scroll.refreshComplete');
+       });
+    };
+
+
 
 
   $scope.viewGameDetails = function(game) {
